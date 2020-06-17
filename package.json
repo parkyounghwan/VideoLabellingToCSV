@@ -1,0 +1,30 @@
+{
+  "name": "videolabellingtocsv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --mac --win --publish never",
+    "deploy": "electron-builder build --mac --win --publish always",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkyounghwan/VideoLabellingToCSV.git"
+  },
+  "author": "parkyounghwan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parkyounghwan/VideoLabellingToCSV/issues"
+  },
+  "homepage": "https://github.com/parkyounghwan/VideoLabellingToCSV#readme",
+  "dependencies": {
+    "electron-updater": "^4.3.1",
+    "update-electron-app": "^1.5.0"
+  },
+  "devDependencies": {
+    "electron": "^9.0.4",
+    "electron-builder": "^22.7.0"  
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Video Labelling To CSV</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/labelling.css">
+  <link rel="stylesheet" href="../css/dragdrop.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Drag&Drop Video file -->
+    <h2>Drag&Drop Video file</h2>
+    <p id="frame-number">0</p>
+    <div class="row" id="video-container">
+
+      <div id="drag-file">
+        <video src="" controls hidden></video>
+      </div>
+    </div>
+
+    <!-- Table for Labelling data -->
+    <div class="row" id="labelling-container">
+      <h2>Table for Labelling data</h2>
+
+      <div id="labelling-table-conatiner">
+        <table class="table table-bordered">
+          <thead class="thead-light" id="csv-header">
+            <tr>
+              <th scope="col"><input type="text" value=""></th>
+              <th scope="col"><input type="text" value=""></th>
+              <th scope="col"><input type="text" value=""></th>
+              <th scope="col"><input type="text" value=""></th>
+              <th scope="col"><input type="text" value=""></th>
+            </tr>
+          </thead>
+          <tbody id="csv-value">
+            <tr>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+            </tr>
+            <tr>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+              <td><input type="text" value=""></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Create CSV -->
+    <div class="row" id="button-container">
+      <h2>Create CSV</h2>
+
+      <div>
+        <button class="btn btn-outline-success" id="create-csv-button">Create CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../src/csvMaker.js"></script>
+  <script src="../../src/fileUpload.js"></script>
+  <script src="../../src/keyboardControl.js"></script>
+</body>
+
+</html>
