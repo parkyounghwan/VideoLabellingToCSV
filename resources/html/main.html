@@ -27,31 +27,33 @@
     <!-- Table for Labelling data -->
     <div class="row" id="labelling-container">
       <h2>Table for Labelling data</h2>
+      <div>
+        <label for="row-count-container">행</label>
+        <select name="row-count-container" id="row-count-container">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+
+        <label for="column-count-container">열</label>
+        <select name="column-count-container" id="column-count-container">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
 
       <div id="labelling-table-conatiner">
         <table class="table table-bordered">
           <thead class="thead-light" id="csv-header">
             <tr>
               <th scope="col"><input type="text" value=""></th>
-              <th scope="col"><input type="text" value=""></th>
-              <th scope="col"><input type="text" value=""></th>
-              <th scope="col"><input type="text" value=""></th>
-              <th scope="col"><input type="text" value=""></th>
             </tr>
           </thead>
           <tbody id="csv-value">
             <tr>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-            </tr>
-            <tr>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
-              <td><input type="text" value=""></td>
               <td><input type="text" value=""></td>
             </tr>
           </tbody>
@@ -72,6 +74,7 @@
   <script src="../../src/csvMaker.js"></script>
   <script src="../../src/fileUpload.js"></script>
   <script src="../../src/keyboardControl.js"></script>
+  <script src="../../src/tag_control/table.js"></script>
 </body>
 
 </html>

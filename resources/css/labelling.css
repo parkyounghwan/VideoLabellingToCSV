@@ -1,3 +1,4 @@
 #labelling-table-conatiner {
-  overflow-x: auto;
+  overflow: auto;
+  height: 100%;
 }
