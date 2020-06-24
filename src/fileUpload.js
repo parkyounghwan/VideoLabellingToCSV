@@ -24,6 +24,8 @@
       
       video.src = file.path;
       video.hidden = false;
+
+      document.querySelector("#drag-file > h1").hidden = true;
     }
 
     return false;
