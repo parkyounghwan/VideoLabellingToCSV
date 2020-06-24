@@ -4,8 +4,14 @@ const columnCountContainer = document.getElementById("column-count-container");
 rowCountContainer.addEventListener("change", () => {
   const rowCount = rowCountContainer.options[rowCountContainer.selectedIndex].value;
 
-  for(let i = 0; i < rowCount; i++) {
-    createTableColumn();
+  const nowRowCount = document.getElementById("csv-value").children.length;
+
+  for (let i = 0; i < (nowRowCount - rowCount); i++) {
+    deleteTableRow();
+  }
+
+  for (let i = nowRowCount; i < rowCount; i++) {
+    createTableRow();
   }
 })
 
@@ -18,17 +24,17 @@ columnCountContainer.addEventListener("change", () => {
     deleteTableColumn();
   }
 
-  for(let i = nowColumnCount; i < columnCount; i++) {
-    createTableRow();
+  for (let i = nowColumnCount; i < columnCount; i++) {
+    createTableColumn();
   }
 });
 
-const createTableRow = () => {
+const createTableColumn = () => {
   const tableHeaderContainer = document.getElementById("csv-header");
 
   const th = document.createElement("th");
   th.setAttribute("scope", "col");
-  
+
   const headerInput = document.createElement("input");
   headerInput.setAttribute("type", "text");
   headerInput.setAttribute("value", "");
@@ -44,18 +50,18 @@ const createTableRow = () => {
   for (let i = 0; i < rowCount; i++) {
     const td = document.createElement("td");
     td.setAttribute("scope", "col");
-  
+
     const rowInput = document.createElement("input");
     rowInput.setAttribute("type", "text");
     rowInput.setAttribute("value", "");
-  
+
     td.appendChild(rowInput);
-  
+
     tableValueContainer.children[i].appendChild(td);
   }
 }
 
-const createTableColumn = () => {
+const createTableRow = () => {
   const tableValueContainer = document.getElementById("csv-value");
 
   tableValueContainer.appendChild(tableValueContainer.firstElementChild.cloneNode(true));
@@ -68,9 +74,13 @@ const deleteTableColumn = () => {
 
   const tableValueContainer = document.getElementById("csv-value");
 
-  const rowCount = tableValueContainer.children.length;
+  Array.prototype.forEach.call(tableValueContainer.children, (tr) => {
+    tr.lastElementChild.remove();
+  });
+}
 
-  for (let i = 0; i < rowCount; i++) {
-    console.log(tableValueContainer.lastElementChild.lastElementChild.remove());
-  }
+const deleteTableRow = () => {
+  const tableValueContainer = document.getElementById("csv-value");
+
+  tableValueContainer.lastChild.remove();
 }

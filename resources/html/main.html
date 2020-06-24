@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/labelling.css">
   <link rel="stylesheet" href="../css/dragdrop.css">
+  <link rel="stylesheet" href="../css/bottom.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="main-container">
     <!-- Drag&Drop Video file -->
-    <h2>Drag&Drop Video file</h2>
     <p id="frame-number">0</p>
     <div class="row" id="video-container">
 
@@ -24,50 +24,64 @@
       </div>
     </div>
 
+    <hr>
+
     <!-- Table for Labelling data -->
     <div class="row" id="labelling-container">
-      <h2>Table for Labelling data</h2>
-      <div>
-        <label for="row-count-container">행</label>
-        <select name="row-count-container" id="row-count-container">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
 
-        <label for="column-count-container">열</label>
-        <select name="column-count-container" id="column-count-container">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
+      <div class="container" id="labelling-inner-container">
+
+        <div class="row" id="table-size-select-container">
+          <label for="row-count-container">행</label>
+          <select name="row-count-container" id="row-count-container">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+
+          <label for="column-count-container">열</label>
+          <select name="column-count-container" id="column-count-container">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+
+        <div class="row" id="labelling-table-conatiner">
+          <table class="table table-bordered" id="labelling-table">
+            <thead class="thead-light" id="csv-header">
+              <tr>
+                <th scope="col"><input type="text" value=""></th>
+              </tr>
+            </thead>
+            <tbody id="csv-value">
+              <tr>
+                <td><input type="text" value=""></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div id="labelling-table-conatiner">
-        <table class="table table-bordered">
-          <thead class="thead-light" id="csv-header">
-            <tr>
-              <th scope="col"><input type="text" value=""></th>
-            </tr>
-          </thead>
-          <tbody id="csv-value">
-            <tr>
-              <td><input type="text" value=""></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
+
+    <hr>
 
     <!-- Create CSV -->
     <div class="row" id="button-container">
-      <h2>Create CSV</h2>
-
-      <div>
-        <button class="btn btn-outline-success" id="create-csv-button">Create CSV</button>
-      </div>
+      <button class="btn btn-outline-success" id="create-csv-button">Create CSV</button>
     </div>
   </div>
 
