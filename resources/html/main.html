@@ -9,14 +9,15 @@
 
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/labelling.css">
-  <link rel="stylesheet" href="../css/dragdrop.css">
   <link rel="stylesheet" href="../css/bottom.css">
 </head>
 
 <body>
   <div class="container" id="main-container">
+
+    <p id="video-path"></p>
+    
     <!-- Drag&Drop Video file -->
-    <p id="frame-number">0</p>
     <div class="row" id="video-container">
       <div id="drag-file">
         <h1>Drag & Drop</h1>
@@ -83,12 +84,11 @@
     <div class="row" id="button-container">
       <button class="btn btn-outline-success" id="create-csv-button">Create CSV</button>
     </div>
-  </div>
 
-  <script src="../../src/csvMaker.js"></script>
-  <script src="../../src/fileUpload.js"></script>
-  <script src="../../src/keyboardControl.js"></script>
-  <script src="../../src/tag_control/table.js"></script>
+  </div>
+  <script>
+    require("../../src/main.js");
+  </script>
 </body>
 
 </html>
