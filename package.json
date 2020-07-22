@@ -2,7 +2,7 @@
   "name": "videolabellingtocsv",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build --mac --win --publish never",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/parkyounghwan/VideoLabellingToCSV#readme",
   "dependencies": {
+    "electron-mocha": "^9.0.1",
     "electron-updater": "^4.3.1",
     "mediainfo.js": "^0.1.2",
     "update-electron-app": "^1.5.0"

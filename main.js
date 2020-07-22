@@ -21,7 +21,7 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-})
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -33,4 +33,8 @@ app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
-})
+});
+
+ipcMain.on('ondrop', (event, filePath) => {
+  event.reply("sendDropFilePath", filePath);
+});

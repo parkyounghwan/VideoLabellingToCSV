@@ -8,86 +8,78 @@
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/labelling.css">
-  <link rel="stylesheet" href="../css/bottom.css">
 </head>
 
 <body>
   <div class="container" id="main-container">
+    <div class="row">
+      <b>file path:&nbsp;</b><span id="video-path"></span>
+      <b>fps :&nbsp;</b><span id="video-fps"></span>
+    </div>
 
-    <p id="video-path"></p>
-    
-    <!-- Drag&Drop Video file -->
+    <!-- Video -->
     <div class="row" id="video-container">
-      <div id="drag-file">
+      <div id="drop" style="z-index: 2;">
         <h1>Drag & Drop</h1>
-        <video src="" controls hidden></video>
+        <video id="video-file" src="" controls hidden></video>
+      </div>
+      <div id="file-info" style="color:greenyellow; position: relative; z-index: 3; margin-left: -100%; width: 0; height: 0;" hidden>
+        file info
       </div>
     </div>
 
-    <hr>
+    <div class="row">
+      <label for="row-count-container">row&nbsp;</label>
+      <select name="row-count-container" id="row-count-container">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
 
-    <!-- Table for Labelling data -->
-    <div class="row" id="labelling-container">
-
-      <div class="container" id="labelling-inner-container">
-
-        <div class="row" id="table-size-select-container">
-          <label for="row-count-container">행</label>
-          <select name="row-count-container" id="row-count-container">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-          </select>
-
-          <label for="column-count-container">열</label>
-          <select name="column-count-container" id="column-count-container">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-          </select>
-        </div>
-
-        <div class="row" id="labelling-table-conatiner">
-          <table class="table table-bordered" id="labelling-table">
-            <thead class="thead-light" id="csv-header">
-              <tr>
-                <th scope="col"><input type="text" value=""></th>
-              </tr>
-            </thead>
-            <tbody id="csv-value">
-              <tr>
-                <td><input type="text" value=""></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+      <label for="column-count-container">column&nbsp;</label>
+      <select name="column-count-container" id="column-count-container">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
     </div>
 
-    <hr>
-
-    <!-- Create CSV -->
-    <div class="row" id="button-container">
-      <button class="btn btn-outline-success" id="create-csv-button">Create CSV</button>
+    <!-- Table -->
+    <div class="row" id="csv-table-container">
+      <table class="table table-bordered">
+        <thead class="thead-light" id="csv-header">
+          <tr>
+            <th scope="col"><input type="text" value=""></th>
+          </tr>
+        </thead>
+        <tbody id="csv-value">
+          <tr>
+            <td><input type="text" value=""></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+    <!-- button -->
+    <div class="row">
+      <a href="#" id="create-csv-button">Create CSV file</a>
+    </div>
   </div>
+
   <script>
-    require("../../src/main.js");
+    require("../../src/index.js");
   </script>
 </body>
 

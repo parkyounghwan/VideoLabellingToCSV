@@ -1,59 +1,52 @@
 const fileInfo = require("./fileInfo");
 
-const fps = 25;
+document.addEventListener("keydown", async (event) => {
+  const videoFile = document.getElementById("video-file");
+  const fps = document.getElementById("video-fps").innerText;
 
-window.addEventListener("keypress", (event) => {
-  const video = document.querySelector("#drag-file > video");
+  switch (event.which) {
+    case 16:
+      document.getElementById("file-info").hidden = false;
 
-  console.log("event.keyCode: ", event.keyCode);
+      const filePath = document.getElementById("video-path").innerText;
 
-  // if (video.hidden) {
-  //   return false;
-  // }
+      const result = await fileInfo(filePath);
 
-  // const frameNumber = getCurrentVideoFrame(video, fps);
+      const videoInfo = result.media.track[1];
+      const frameRate = Number.parseInt(videoInfo.FrameRate);
+      const frameCount = Number.parseInt(videoInfo.FrameCount);
+      const duration = Number.parseInt(videoInfo.Duration);
+      const currentTime = videoFile.currentTime;
+      const currentFrame = Math.floor(currentTime * frameRate);
 
-  // if (event.keyCode == 113) {
-  //   const videoPath = video.src;
+      const info = {
+        FrameRate: frameRate,
+        FrameCount: frameCount,
+        Duration: duration,
+        CurrentTime: currentTime,
+        CurrentFrame: currentFrame
+      }
 
-  //   const video1 = document.createElement("video");
-  //   video1.src = videoPath;
+      document.getElementById("file-info").innerText = JSON.stringify(info, null, '\t');
+      break;
 
-  //   console.log(video1.files);
-  // }
+    case 37:
+      const rearFrame = Math.max(0, videoFile.currentTime - (1 / fps));
+      videoFile.currentTime = rearFrame;
 
-  // if (event.keyCode == 32) {
+      break;
 
-  //   return true;
-  // }
+    case 39:
+      const forwardFrame = Math.min(videoFile.duration, videoFile.currentTime + (1 / fps));
+      videoFile.currentTime = forwardFrame;
+      
+      break;
 
-  // if (event.keyCode == 97) {
-  //   video.currentTime = Math.max(0, video.currentTime - (1 / fps));
-
-  //   return true;
-  // }
-
-  // if (event.keyCode == 115) {
-  //   video.currentTime = Math.min(video.duration, video.currentTime + (1 / fps));
-
-  //   return true;
-  // }
-  
-  if (event.keyCode == 32) {
-    const videoPath = document.getElementById("video-path").innerText;
-
-    if(videoPath){
-      fileInfo(document.getElementById("video-path").innerText);
-    }
-
-    return true;
+    default:
+      return false;
   }
-
-  return false;
 });
 
-const getCurrentVideoFrame = (video, frameRate) => {
-  const curTime = video.currentTime;
-
-  return Math.floor(curTime * frameRate);
-};
+document.addEventListener("keyup", (event) => {
+  document.getElementById("file-info").hidden = true;
+})

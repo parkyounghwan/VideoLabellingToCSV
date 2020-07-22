@@ -3,9 +3,13 @@ html, body {
   height: 100%;
 }
 
+.row {
+  margin: auto;
+}
+
 #main-container {
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   border: 1px solid red;
 
   position: absolute;
@@ -14,11 +18,17 @@ html, body {
   left: 0;
   right: 0;
   margin: 2% auto;
+
+  overflow: auto;
+}
+
+#video-path {
+  word-break: break-all;
 }
 
 #video-container {
   width: 100%;
-  min-height: 40%;
+  height: 50%;
   margin: auto;
   border: 3px dashed darkgrey;
 }
@@ -35,7 +45,7 @@ video {
   border: 3px dashed black;
 }
 
-#drag-file {
+#drop {
   position: relative;
   width: 100%;
   text-align: center;
@@ -43,14 +53,11 @@ video {
   overflow: auto;
 }
 
-#labelling-container {
-  width: 100%;
-  height: 40%;
-  margin: auto;
+#csv-table-container {
+  height: 25%;
+  overflow: auto;
 }
 
-#button-container {
-  width: 100%;
-  height: auto;
-  margin: auto;
+#csv-table-container > table {
+  width: auto;
 }

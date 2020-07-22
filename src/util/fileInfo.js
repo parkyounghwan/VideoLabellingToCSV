@@ -8,8 +8,11 @@ module.exports = async (filePath) => {
   let mediainfo;
 
   try {
+    if(!filePath) throw new Error("File Path Not Found");
+
     fileHandle = await open(filePath, 'r');
-    mediainfo = await MediaInfo({ format: 'object' });  //object, JSON, XML, HTML, text
+    //object, JSON, XML, HTML, text
+    mediainfo = await MediaInfo({ format: 'object' });
 
     const getSize = async () => (await fileHandle.stat()).size;
 
@@ -22,9 +25,6 @@ module.exports = async (filePath) => {
     };
 
     const result =  await mediainfo.analyzeData(getSize, readChunk);
-
-    console.log(mediainfo.inform());
-    console.log(mediainfo.openBufferContinueGotoGet());
 
     return result;
   } catch (error) {
