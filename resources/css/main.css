@@ -1,35 +1,82 @@
 html, body {
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
-.container {
+.row {
+  margin: auto;
+  margin-bottom: 1%;
+}
+
+#main-container {
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   border: 1px solid red;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 2% auto;
+
+  overflow: auto;
+}
+
+#video-file {
+  word-break: break-all;
+}
+
+#file-info1 {
+  color: greenyellow;
+  position: relative;
+  z-index: 3;
+  margin-left: -100%;
+  width: 0;
+  height: 0;
+}
+
+#file-info2 {
+  color: black;
+  position: relative;
+  z-index: 4;
+  margin-left: -100%;
+  width: 0;
+  height: 0;
 }
 
 #video-container {
   width: 100%;
-  min-height: 40%;
-  margin: auto;
+  height: 50%;
   border: 3px dashed darkgrey;
 }
 
-#labelling-container {
-  width: 100%;
-  max-height: 40%;
-  margin: auto;
-}
-
-#button-container {
-  width: 100%;
-  max-height: 10%;
-  margin: auto;
-}
-
 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  max-width: 100%;
+}
+
+#drop {
+  position: relative;
   width: 100%;
-  height: 100%;
-  border: 3px dashed black;
+  text-align: center;
+  overflow: auto;
+  z-index: 2;
+  color: white;
+  background-color: black;
+}
+
+#csv-table-container {
+  height: 35%;
+  overflow: auto;
+  border: 1px solid lightgray;
+}
+
+#csv-table-container > table {
+  width: auto;
 }

@@ -1,11 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
+window.process.setMaxListeners(0);
+
 let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 1200,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -21,7 +23,7 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-})
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -33,4 +35,4 @@ app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
-})
+});

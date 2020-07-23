@@ -27,6 +27,8 @@ createCSVButton.onclick = () => {
     for (let j = 0; j < csvValueRowCellsCount; j++) {
       const cellValue = csvValueRowCells[j].firstChild.value;
 
+      csvValueRowCells[j].firstChild.value = "";
+
       rowValues.push(cellValue);
     }
 
