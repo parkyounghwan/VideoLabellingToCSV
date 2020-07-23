@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
+window.process.setMaxListeners(0);
+
 let mainWindow;
 
 const createWindow = () => {
@@ -33,8 +35,4 @@ app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
-});
-
-ipcMain.on('ondrop', (event, filePath) => {
-  event.reply("sendDropFilePath", filePath);
 });

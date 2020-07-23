@@ -2,13 +2,15 @@ const fileInfo = require("./fileInfo");
 
 document.addEventListener("keydown", async (event) => {
   const videoFile = document.getElementById("video-file");
+  const filePath = videoFile.getAttribute("src");
   const fps = document.getElementById("video-fps").innerText;
 
-  switch (event.which) {
-    case 16:
-      document.getElementById("file-info").hidden = false;
+  if(!filePath) return false;
 
-      const filePath = document.getElementById("video-path").innerText;
+  switch (event.which) {
+    case 16:  // 'Shift'
+      document.getElementById("file-info1").hidden = false;
+      document.getElementById("file-info2").hidden = false;
 
       const result = await fileInfo(filePath);
 
@@ -19,24 +21,20 @@ document.addEventListener("keydown", async (event) => {
       const currentTime = videoFile.currentTime;
       const currentFrame = Math.floor(currentTime * frameRate);
 
-      const info = {
-        FrameRate: frameRate,
-        FrameCount: frameCount,
-        Duration: duration,
-        CurrentTime: currentTime,
-        CurrentFrame: currentFrame
-      }
+      const info = `FrameRate:${frameRate} FrameCount:${frameCount} Duration:${duration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
 
-      document.getElementById("file-info").innerText = JSON.stringify(info, null, '\t');
+      document.getElementById("file-info1").innerText = info;
+      document.getElementById("file-info2").innerText = info;
+
       break;
 
-    case 37:
+    case 188:  // 'Left Arrow'
       const rearFrame = Math.max(0, videoFile.currentTime - (1 / fps));
       videoFile.currentTime = rearFrame;
 
       break;
 
-    case 39:
+    case 190:  // 'Right Arrow'
       const forwardFrame = Math.min(videoFile.duration, videoFile.currentTime + (1 / fps));
       videoFile.currentTime = forwardFrame;
       
@@ -45,8 +43,17 @@ document.addEventListener("keydown", async (event) => {
     default:
       return false;
   }
+  
+  return false;
 });
 
 document.addEventListener("keyup", (event) => {
-  document.getElementById("file-info").hidden = true;
+  if(event.which == 16) {
+    document.getElementById("file-info1").hidden = true;
+    document.getElementById("file-info2").hidden = true;
+
+    return false;
+  }
+
+  return false;
 })

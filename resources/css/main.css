@@ -5,6 +5,7 @@ html, body {
 
 .row {
   margin: auto;
+  margin-bottom: 1%;
 }
 
 #main-container {
@@ -22,14 +23,31 @@ html, body {
   overflow: auto;
 }
 
-#video-path {
+#video-file {
   word-break: break-all;
+}
+
+#file-info1 {
+  color: greenyellow;
+  position: relative;
+  z-index: 3;
+  margin-left: -100%;
+  width: 0;
+  height: 0;
+}
+
+#file-info2 {
+  color: black;
+  position: relative;
+  z-index: 4;
+  margin-left: -100%;
+  width: 0;
+  height: 0;
 }
 
 #video-container {
   width: 100%;
   height: 50%;
-  margin: auto;
   border: 3px dashed darkgrey;
 }
 
@@ -41,21 +59,22 @@ video {
   bottom: 0;
 
   max-width: 100%;
-
-  border: 3px dashed black;
 }
 
 #drop {
   position: relative;
   width: 100%;
   text-align: center;
-  background-color: lightblue;
   overflow: auto;
+  z-index: 2;
+  color: white;
+  background-color: black;
 }
 
 #csv-table-container {
-  height: 25%;
+  height: 35%;
   overflow: auto;
+  border: 1px solid lightgray;
 }
 
 #csv-table-container > table {

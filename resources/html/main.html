@@ -13,18 +13,19 @@
 <body>
   <div class="container" id="main-container">
     <div class="row">
-      <b>file path:&nbsp;</b><span id="video-path"></span>
-      <b>fps :&nbsp;</b><span id="video-fps"></span>
+      <b>file:&nbsp;</b><span id="video-name"></span>&nbsp;
+      <b>fps:&nbsp;</b><span id="video-fps"></span>
     </div>
 
     <!-- Video -->
     <div class="row" id="video-container">
-      <div id="drop" style="z-index: 2;">
+      <div id="drop">
         <h1>Drag & Drop</h1>
         <video id="video-file" src="" controls hidden></video>
       </div>
-      <div id="file-info" style="color:greenyellow; position: relative; z-index: 3; margin-left: -100%; width: 0; height: 0;" hidden>
-        file info
+      <div id="file-info1" hidden>
+      </div>
+      <div id="file-info2" hidden>
       </div>
     </div>
 
