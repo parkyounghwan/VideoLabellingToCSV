@@ -1,12 +1,13 @@
 {
   "name": "videolabellingtocsv",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder build --mac --win --publish never",
-    "deploy": "electron-builder build --mac --win --publish always",
+    "build": "electron-builder build --mac --publish never",
+    "deployformac": "electron-builder build --mac --publish always",
+    "deployformulti": "electron-builder -mwl --publish always --releaseType release",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
