@@ -1,7 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
-window.process.setMaxListeners(0);
-
 let mainWindow;
 
 const createWindow = () => {
@@ -14,7 +12,6 @@ const createWindow = () => {
   });
 
   mainWindow.loadFile(`${__dirname}/resources/html/main.html`);
-  mainWindow.webContents.openDevTools();  // 브라우저 개발자 도구
 
   mainWindow.on("closed", () => {
     mainWindow = null;
