@@ -1,11 +1,13 @@
 const fileInfo = require("./fileInfo");
 
-document.addEventListener("keydown", async (event) => {
+const videoFile = document.getElementById("video-file");
+const fps = document.getElementById("video-fps").innerText;
+
+window.addEventListener("keydown", async (event) => {
   const videoFile = document.getElementById("video-file");
   const filePath = videoFile.getAttribute("src");
-  const fps = document.getElementById("video-fps").innerText;
 
-  if(!filePath) return false;
+  if (!filePath) return false;
 
   switch (event.which) {
     case 16:  // 'Shift'
@@ -28,32 +30,50 @@ document.addEventListener("keydown", async (event) => {
 
       break;
 
-    case 188:  // 'Left Arrow'
-      const rearFrame = Math.max(0, videoFile.currentTime - (1 / fps));
-      videoFile.currentTime = rearFrame;
-
-      break;
-
-    case 190:  // 'Right Arrow'
-      const forwardFrame = Math.min(videoFile.duration, videoFile.currentTime + (1 / fps));
-      videoFile.currentTime = forwardFrame;
-      
-      break;
-
     default:
       return false;
   }
-  
-  return false;
 });
 
-document.addEventListener("keyup", (event) => {
-  if(event.which == 16) {
+window.addEventListener("keypress", (event) => {  
+  if (!event.repeat) {
+    console.log(`Key "${event.key}" pressed  [event: keydown]`);
+    const videoFile = document.getElementById("video-file");
+
+    if (event.key == ',') {
+      const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
+      videoFile.currentTime = rearFrame;
+    } else if (event.key == '.') {
+      const rearFrame = Math.max(0, videoFile.currentTime + (1 / 60));
+      videoFile.currentTime = rearFrame;
+    }
+  } else {
+    console.log(`Key "${event.key}" repeating  [event: keydown]`);
+    // if (event.key === ",") {
+    //   const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
+    //   videoFile.currentTime = rearFrame;
+    // } else if (event.key === ".") {
+    //   const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
+    //   videoFile.currentTime = rearFrame;
+    // }
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  if (event.which == 16) {
     document.getElementById("file-info1").hidden = true;
     document.getElementById("file-info2").hidden = true;
 
     return false;
   }
-
-  return false;
 })
+
+const changeState = (event) => {
+  if(event.key == ",") {
+
+  }
+
+  if(event.key == ".") {
+
+  }
+}

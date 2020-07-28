@@ -1,40 +1,38 @@
-(() => {
-  const fileInfo = require("./fileInfo");
+const { ipcRenderer } = require("electron");
+const fileInfo = require("./fileInfo");
 
-  const dropSpace = document.getElementById("drop");
+const videoFileDropZone = document.getElementById("drop");
 
-  dropSpace.ondrop = async (event) => {
-    event.preventDefault();
+videoFileDropZone.ondrop = async (event) => {
+  event.preventDefault();
 
-    const fileList = event.dataTransfer.files;
-    const file = fileList[0];
+  // 'Path', 'Name'
+  const result = ipcRenderer.sendSync("ondrop", [event.dataTransfer.files[0].path, event.dataTransfer.files[0].name]);
 
-    const path = file.path;
-    const name = file.name;
-    
-    const result = await fileInfo(path);
-    const videoInfo = result.media.track[1];
-    
-    const frameRate = Number.parseInt(videoInfo.FrameRate);
-    
-    document.getElementById("video-file").src = path;
-    document.getElementById("video-name").innerText = name;
-    document.getElementById("video-fps").innerText = frameRate;
+  const filePath = result.filePath;
+  const fileName = result.fileName;
 
-    document.getElementById("video-file").hidden = "";
+  document.getElementById("video-file").src = filePath;
+  document.getElementById("video-file").hidden = "";
+  document.getElementById("video-name").innerText = fileName;
 
-    return false;
-  };
+  // 'Metadata'
+  const videoMetadata = await fileInfo(filePath);
+  const frameRate = Number.parseInt(videoMetadata.media.track[1].FrameRate);
 
-  dropSpace.ondragover = () => {
-    return false;
-  };
+  document.getElementById("video-fps").innerText = frameRate;
 
-  dropSpace.ondragleave = () => {
-    return false;
-  };
+  return false;
+}
 
-  dropSpace.ondragend = () => {
-    return false;
-  };
-})();
+videoFileDropZone.ondragover = () => {
+  return false;
+};
+
+videoFileDropZone.ondragleave = () => {
+  return false;
+};
+
+videoFileDropZone.ondragend = () => {
+  return false;
+};
