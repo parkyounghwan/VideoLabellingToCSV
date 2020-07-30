@@ -1,32 +1,32 @@
-const fileInfo = require("./fileInfo");
+const { ipcRenderer } = require("electron");
 
-const videoFile = document.getElementById("video-file");
-const fps = document.getElementById("video-fps").innerText;
-
-window.addEventListener("keydown", async (event) => {
-  const videoFile = document.getElementById("video-file");
-  const filePath = videoFile.getAttribute("src");
+window.addEventListener("keydown", (event) => {
+  const videoElement = document.getElementById("video-file");
+  const filePath = videoElement.getAttribute("src");
+  const currentTime = videoElement.currentTime;
 
   if (!filePath) return false;
 
-  switch (event.which) {
-    case 16:  // 'Shift'
+  switch (event.key) {
+    case "Shift":
+      console.log(window.performance.memory);
       document.getElementById("file-info1").hidden = false;
-      document.getElementById("file-info2").hidden = false;
 
-      const result = await fileInfo(filePath);
+      const fileInfo = ipcRenderer.sendSync("getFileInfo", [filePath, currentTime]);
 
-      const videoInfo = result.media.track[1];
-      const frameRate = Number.parseInt(videoInfo.FrameRate);
-      const frameCount = Number.parseInt(videoInfo.FrameCount);
-      const duration = Number.parseInt(videoInfo.Duration);
-      const currentTime = videoFile.currentTime;
-      const currentFrame = Math.floor(currentTime * frameRate);
+      document.getElementById("file-info1").innerText = fileInfo;
 
-      const info = `FrameRate:${frameRate} FrameCount:${frameCount} Duration:${duration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
+      break;
 
-      document.getElementById("file-info1").innerText = info;
-      document.getElementById("file-info2").innerText = info;
+    case ",":
+      const rearFrame = Math.max(0, currentTime - (1 / 60));
+      videoElement.currentTime = rearFrame;
+
+      break;
+
+    case ".":
+      const frontFrame = Math.max(0, currentTime + (1 / 60));
+      videoElement.currentTime = frontFrame;
 
       break;
 
@@ -35,45 +35,14 @@ window.addEventListener("keydown", async (event) => {
   }
 });
 
-window.addEventListener("keypress", (event) => {  
-  if (!event.repeat) {
-    console.log(`Key "${event.key}" pressed  [event: keydown]`);
-    const videoFile = document.getElementById("video-file");
+window.addEventListener("keyup", (event) => {
+  switch (event.key) {
+    case "Shift":
+      document.getElementById("file-info1").hidden = true;
 
-    if (event.key == ',') {
-      const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
-      videoFile.currentTime = rearFrame;
-    } else if (event.key == '.') {
-      const rearFrame = Math.max(0, videoFile.currentTime + (1 / 60));
-      videoFile.currentTime = rearFrame;
-    }
-  } else {
-    console.log(`Key "${event.key}" repeating  [event: keydown]`);
-    // if (event.key === ",") {
-    //   const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
-    //   videoFile.currentTime = rearFrame;
-    // } else if (event.key === ".") {
-    //   const rearFrame = Math.max(0, videoFile.currentTime - (1 / 60));
-    //   videoFile.currentTime = rearFrame;
-    // }
+      break;
+
+    default:
+      return false;
   }
 });
-
-window.addEventListener("keyup", (event) => {
-  if (event.which == 16) {
-    document.getElementById("file-info1").hidden = true;
-    document.getElementById("file-info2").hidden = true;
-
-    return false;
-  }
-})
-
-const changeState = (event) => {
-  if(event.key == ",") {
-
-  }
-
-  if(event.key == ".") {
-
-  }
-}

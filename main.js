@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
+const fileInfo = require("./src/util/fileInfo");
+
 let mainWindow;
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = true;
@@ -46,4 +48,22 @@ ipcMain.on("ondrop", (event, response) => {
     "filePath": filePath,
     "fileName": fileName
   }
+});
+
+ipcMain.on("getFileInfo", async (event, response) => {
+  const filePath = response[0];
+  const time = response[1]; 
+
+  const result = await fileInfo(filePath);
+
+  const videoInfo = result.media.track[1];
+  const frameRate = Number.parseInt(videoInfo.FrameRate);
+  const frameCount = Number.parseInt(videoInfo.FrameCount);
+  const duration = Number.parseInt(videoInfo.Duration);
+  const currentTime = time;
+  const currentFrame = Math.floor(currentTime * frameRate);
+  
+  const info = `FrameRate:${frameRate} FrameCount:${frameCount} Duration:${duration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
+
+  event.returnValue = info;
 });
