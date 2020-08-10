@@ -1,38 +1,51 @@
-const { open } = require('fs').promises
+const fileinput = document.getElementById("fileinput");
+const videoTag = document.getElementById("video-file");
+const videoFps = document.getElementById("video-fps");
+const videoFrameCount = document.getElementById("video-frame-count");
+const videoDuration = document.getElementById("video-duration");
+
 const MediaInfo = require("mediainfo.js");
 
-module.exports = async (filePath) => {
+const onChangeFile = (mediainfo) => {
+  const file = fileinput.files[0]
 
-  let fileHandle;
-  let mediainfo;
+  if (file) {
 
-  try {
-    if(!filePath) throw new Error("File Path Not Found");
+    const getSize = () => file.size
 
-    fileHandle = await open(filePath, 'r');
-    //object, JSON, XML, HTML, text
-    mediainfo = await MediaInfo({ format: 'object' });
+    const readChunk = (chunkSize, offset) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = (event) => {
+          if (event.target.error) {
+            reject(event.target.error)
+          }
+          resolve(new Uint8Array(event.target.result))
+        }
+        reader.readAsArrayBuffer(file.slice(offset, offset + chunkSize))
+      })
 
-    const getSize = async () => (await fileHandle.stat()).size;
+    mediainfo
+      .analyzeData(getSize, readChunk)
+      .then((result) => {
+        const fps = result.media.track[0].FrameRate;
+        const frameCount = result.media.track[0].FrameCount;
+        const duration = result.media.track[0].Duration;
 
-    const readChunk = async (size, offset) => {
-      const buffer = new Uint8Array(size);
+        videoTag.src = file.path;
 
-      await fileHandle.read(buffer, 0, size, offset);
-
-      return buffer;
-    };
-
-    const result =  await mediainfo.analyzeData(getSize, readChunk);
-
-    return result;
-
-  } catch (error) {
-    console.error(error);
-
-  } finally {
-    fileHandle && (await fileHandle.close());
-    mediainfo && mediainfo.close();
-    
+        videoFps.innerText = Number.parseInt(fps);
+        videoFrameCount.innerText = Number.parseInt(frameCount);
+        videoDuration.innerText = Number.parseInt(duration);
+      })
+      .catch((error) => {
+        console.log(error.stack);
+      })
   }
 }
+
+MediaInfo({ format: 'object' }, (mediainfo) => {
+  fileinput.addEventListener("change", () => {
+    onChangeFile(mediainfo);
+  });
+})

@@ -1,14 +1,12 @@
 {
   "name": "videolabellingtocsv",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build --mac --publish never",
-    "deployformac": "electron-builder build --mac --publish always",
-    "deployformulti": "electron-builder -mwl --publish always --releaseType release",
-    "test": "mocha test/**/**.spec.js"
+    "deployformulti": "electron-builder build --mac --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -21,14 +19,12 @@
   },
   "homepage": "https://github.com/parkyounghwan/VideoLabellingToCSV#readme",
   "dependencies": {
-    "electron-mocha": "^9.0.1",
     "electron-updater": "^4.3.1",
     "mediainfo.js": "^0.1.2",
     "update-electron-app": "^1.5.0"
   },
   "devDependencies": {
     "electron": "^9.1.1",
-    "electron-builder": "^22.7.0",
-    "mocha": "^8.1.1"
+    "electron-builder": "^22.7.0"
   }
 }

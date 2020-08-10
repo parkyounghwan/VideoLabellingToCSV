@@ -23,6 +23,10 @@ html, body {
   overflow: auto;
 }
 
+#main-container > .row:nth-child(1) {
+  margin-top: 1%;
+}
+
 #video-file {
   word-break: break-all;
   margin: auto;

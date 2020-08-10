@@ -11,15 +11,10 @@ window.addEventListener("keydown", (event) => {
       document.getElementById("file-info").hidden = false;
 
       const videoFps = document.getElementById("video-fps").innerText;
-      const videoFrameCount = document.getElementById("video-frame-count").innerText;
-      const videoDuration = document.getElementById("video-duration").innerText;
 
       const currentFrame = Math.floor(currentTime * videoFps);
 
-      console.log(currentTime);
-      console.log(videoFps);
-
-      const info = `FrameRate:${videoFps} FrameCount:${videoFrameCount} Duration:${videoDuration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
+      const info = `CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
 
       document.getElementById("file-info").innerText = info;
 
