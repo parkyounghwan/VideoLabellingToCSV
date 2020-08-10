@@ -5,3 +5,5 @@ electron-builder.yml
 
 resources/mock
 resources/image
+
+test

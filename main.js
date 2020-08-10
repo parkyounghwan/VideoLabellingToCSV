@@ -1,5 +1,4 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-
 const fileInfo = require("./src/util/fileInfo");
 
 let mainWindow;
@@ -52,7 +51,36 @@ ipcMain.on("ondrop", (event, response) => {
 
 ipcMain.on("getFileInfo", async (event, response) => {
   const filePath = response[0];
-  const time = response[1]; 
+  const time = response[1];
+
+  /**
+  let videoInfo;
+  let frameRate;
+  let frameCount;
+  let duration;
+  let currentTime;
+  let currentFrame;
+
+  fileInfo(filePath)
+    .then((result) => {
+      videoInfo = result.media.track[1];
+      frameRate = Number.parseInt(videoInfo.FrameRate);
+      frameCount = Number.parseInt(videoInfo.FrameCount);
+      duration = Number.parseInt(videoInfo.Duration);
+      currentTime = time;
+      currentFrame = Math.floor(currentTime * frameRate);
+
+      const info = `FrameRate:${frameRate} FrameCount:${frameCount} Duration:${duration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
+
+      event.returnValue = info;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      delete fileInfo;
+    });
+   */
 
   const result = await fileInfo(filePath);
 
@@ -62,7 +90,7 @@ ipcMain.on("getFileInfo", async (event, response) => {
   const duration = Number.parseInt(videoInfo.Duration);
   const currentTime = time;
   const currentFrame = Math.floor(currentTime * frameRate);
-  
+
   const info = `FrameRate:${frameRate} FrameCount:${frameCount} Duration:${duration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
 
   event.returnValue = info;

@@ -1,4 +1,3 @@
-const path = require("path");
 const { open } = require('fs').promises
 const MediaInfo = require("mediainfo.js");
 
@@ -27,10 +26,13 @@ module.exports = async (filePath) => {
     const result =  await mediainfo.analyzeData(getSize, readChunk);
 
     return result;
+
   } catch (error) {
     console.error(error);
+
   } finally {
     fileHandle && (await fileHandle.close());
     mediainfo && mediainfo.close();
+    
   }
 }

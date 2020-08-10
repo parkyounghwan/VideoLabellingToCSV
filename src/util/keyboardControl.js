@@ -1,4 +1,22 @@
 const { ipcRenderer } = require("electron");
+const fileInfo2 = require("./fileInfo2");
+
+const MediaInfo = require("mediainfo.js");
+
+MediaInfo({format: "object"}, (mediainfo) => {
+  window.addEventListener("keydown", (event) => {
+    const videoElement = document.getElementById("video-file");
+    const filePath = videoElement.getAttribute("src");
+
+    if(event.key == "Shift") {
+      document.getElementById("file-info1").hidden = false;
+
+      const result = fileInfo2.onChangeFile(mediainfo, filePath);
+
+      document.getElementById("file-info1").innerText = result;
+    }
+  })
+})
 
 window.addEventListener("keydown", (event) => {
   const videoElement = document.getElementById("video-file");
@@ -8,15 +26,14 @@ window.addEventListener("keydown", (event) => {
   if (!filePath) return false;
 
   switch (event.key) {
-    case "Shift":
-      console.log(window.performance.memory);
-      document.getElementById("file-info1").hidden = false;
+    // case "Shift":
+    //   document.getElementById("file-info1").hidden = false;
 
-      const fileInfo = ipcRenderer.sendSync("getFileInfo", [filePath, currentTime]);
+    //   const fileInfo = ipcRenderer.sendSync("getFileInfo", [filePath, currentTime]);
 
-      document.getElementById("file-info1").innerText = fileInfo;
+    //   document.getElementById("file-info1").innerText = fileInfo;
 
-      break;
+    //   break;
 
     case ",":
       const rearFrame = Math.max(0, currentTime - (1 / 60));
