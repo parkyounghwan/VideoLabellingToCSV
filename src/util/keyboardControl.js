@@ -1,22 +1,3 @@
-const { ipcRenderer } = require("electron");
-const fileInfo2 = require("./fileInfo2");
-
-const MediaInfo = require("mediainfo.js");
-
-MediaInfo({format: "object"}, (mediainfo) => {
-  window.addEventListener("keydown", (event) => {
-    const videoElement = document.getElementById("video-file");
-    const filePath = videoElement.getAttribute("src");
-
-    if(event.key == "Shift") {
-      document.getElementById("file-info1").hidden = false;
-
-      const result = fileInfo2.onChangeFile(mediainfo, filePath);
-
-      document.getElementById("file-info1").innerText = result;
-    }
-  })
-})
 
 window.addEventListener("keydown", (event) => {
   const videoElement = document.getElementById("video-file");
@@ -26,14 +7,23 @@ window.addEventListener("keydown", (event) => {
   if (!filePath) return false;
 
   switch (event.key) {
-    // case "Shift":
-    //   document.getElementById("file-info1").hidden = false;
+    case "Shift":
+      document.getElementById("file-info").hidden = false;
 
-    //   const fileInfo = ipcRenderer.sendSync("getFileInfo", [filePath, currentTime]);
+      const videoFps = document.getElementById("video-fps").innerText;
+      const videoFrameCount = document.getElementById("video-frame-count").innerText;
+      const videoDuration = document.getElementById("video-duration").innerText;
 
-    //   document.getElementById("file-info1").innerText = fileInfo;
+      const currentFrame = Math.floor(currentTime * videoFps);
 
-    //   break;
+      console.log(currentTime);
+      console.log(videoFps);
+
+      const info = `FrameRate:${videoFps} FrameCount:${videoFrameCount} Duration:${videoDuration} CurrentTime:${currentTime} CurrentFrame:${currentFrame}`;
+
+      document.getElementById("file-info").innerText = info;
+
+      break;
 
     case ",":
       const rearFrame = Math.max(0, currentTime - (1 / 60));
@@ -55,7 +45,7 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "Shift":
-      document.getElementById("file-info1").hidden = true;
+      document.getElementById("file-info").hidden = true;
 
       break;
 

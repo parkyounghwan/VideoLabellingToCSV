@@ -8,39 +8,25 @@
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <link rel="stylesheet" href="../css/main.css">
-
-  <style>
-    #wrapper {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 8px;
-      position: absolute;
-      width: 100%;
-    }
-    #fileinput {
-      padding-bottom: 8px;
-    }
-    #output {
-      height: 100%;
-    }
-  </style>
 </head>
 
 <body>
   <div class="container" id="main-container">
     <div class="row">
-      <b>file:&nbsp;</b><span id="video-name"></span>&nbsp;
-      <b>fps:&nbsp;</b><span id="video-fps"></span>
+      <input type="file" id="fileinput" name="fileinput" />
+
+      <b>fps:&nbsp;</b><span id="video-fps"></span>&nbsp;
+      <b>frame count:&nbsp;</b><span id="video-frame-count"></span>&nbsp;
+      <b>duration</b>:&nbsp;</b><span id="video-duration"></span>
     </div>
 
     <!-- Video -->
     <div class="row" id="video-container">
       <div id="drop">
         <h1>Drag & Drop</h1>
-        <video id="video-file" src="" controls hidden></video>
+        <video id="video-file" src="" data-size="0" controls></video>
       </div>
-      <div id="file-info1" hidden>
+      <div id="file-info" hidden>
       </div>
     </div>
 
@@ -91,12 +77,6 @@
     <!-- button -->
     <div class="row">
       <a href="#" id="create-csv-button">Create CSV file</a>
-    </div>
-
-    <!-- test -->
-    <div id="wrapper">
-      <input type="file" id="fileinput" name="fileinput" />
-      <textarea id="output"></textarea>
     </div>
 
   </div>

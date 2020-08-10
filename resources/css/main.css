@@ -28,19 +28,10 @@ html, body {
   margin: auto;
 }
 
-#file-info1 {
+#file-info {
   color: greenyellow;
   position: relative;
   z-index: 3;
-  margin-left: -100%;
-  width: 0;
-  height: 0;
-}
-
-#file-info2 {
-  color: black;
-  position: relative;
-  z-index: 4;
   margin-left: -100%;
   width: 0;
   height: 0;
